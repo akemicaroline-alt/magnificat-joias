@@ -48,12 +48,12 @@ export function Hero() {
         <Image
           src="/hero-guadalupe.png"
           alt="Nossa Senhora de Guadalupe, padroeira da coleção 2026"
-          width={636}
-          height={1051}
+          width={605}
+          height={1010}
           priority
           draggable={false}
           sizes="(max-width: 768px) 60vw, 35vw"
-          className="h-[65vh] max-h-[860px] w-auto max-w-[92vw] object-contain opacity-[0.22] mix-blend-lighten md:h-[80vh] md:opacity-[0.40]"
+          className="h-[72vh] max-h-[920px] w-auto max-w-[92vw] object-contain opacity-[0.30] md:h-[85vh] md:opacity-[0.50]"
         />
       </motion.div>
 
