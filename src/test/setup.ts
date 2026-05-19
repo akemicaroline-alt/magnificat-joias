@@ -121,6 +121,19 @@ if (!window.HTMLCanvasElement.prototype.getContext) {
   });
 }
 
+if (typeof window.ResizeObserver === "undefined") {
+  class MockResizeObserver {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  }
+  Object.defineProperty(window, "ResizeObserver", {
+    writable: true,
+    configurable: true,
+    value: MockResizeObserver,
+  });
+}
+
 if (!window.requestAnimationFrame) {
   window.requestAnimationFrame = ((cb: FrameRequestCallback) =>
     setTimeout(() => cb(performance.now()), 16) as unknown as number) as typeof window.requestAnimationFrame;
