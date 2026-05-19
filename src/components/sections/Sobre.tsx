@@ -52,7 +52,6 @@ export function Sobre() {
         <div className="md:col-span-7 flex flex-col gap-8">
           <SectionHeader
             align="left"
-            roman="I"
             eyebrow="Nossa história"
             title="Tradição em cada detalhe"
           />

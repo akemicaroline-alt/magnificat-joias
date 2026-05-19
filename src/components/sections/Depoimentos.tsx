@@ -54,7 +54,6 @@ export function Depoimentos() {
     >
       <Container>
         <SectionHeader
-          roman="IV"
           eyebrow="Devotas"
           title="Histórias de fé"
         />

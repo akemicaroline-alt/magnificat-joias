@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/cn";
 
 export type SectionHeaderProps = {
-  roman?: string;
   eyebrow?: string;
   title: string;
   description?: string;
@@ -25,7 +24,6 @@ const container = {
 };
 
 export function SectionHeader({
-  roman,
   eyebrow,
   title,
   description,
@@ -45,14 +43,6 @@ export function SectionHeader({
         className,
       )}
     >
-      {roman ? (
-        <motion.span
-          variants={fade}
-          className="font-display text-gold-dark/80 italic text-sm tracking-[0.4em]"
-        >
-          {roman}
-        </motion.span>
-      ) : null}
       {eyebrow ? (
         <motion.span variants={fade} className="eyebrow text-gold">
           {eyebrow}

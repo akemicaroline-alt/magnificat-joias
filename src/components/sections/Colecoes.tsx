@@ -65,7 +65,6 @@ export function Colecoes() {
     >
       <Container>
         <SectionHeader
-          roman="II"
           eyebrow="Coleções"
           title="Para cada momento de fé"
           description="Seis linhas autorais reunindo o que há de mais delicado em joalheria sacra contemporânea. Cada peça é produzida sob encomenda, com acabamento manual e embalagem premium."

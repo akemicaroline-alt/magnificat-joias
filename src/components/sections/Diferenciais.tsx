@@ -1,33 +1,37 @@
 "use client";
 
-import { Gem, HeartHandshake, Sparkles, Truck } from "lucide-react";
+import { Gem, Sparkles, Truck } from "lucide-react";
 import { motion } from "framer-motion";
-import type { LucideIcon } from "lucide-react";
+import type { ComponentType } from "react";
 
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
+import { Ingot } from "@/components/icons/Ingot";
+
+type IconProps = { size?: number; className?: string; strokeWidth?: number };
 
 type Item = {
-  icon: LucideIcon;
+  icon: ComponentType<IconProps>;
   title: string;
   description: string;
 };
 
 const ITEMS: Item[] = [
   {
-    icon: Gem,
-    title: "Prata 950 & Ouro 18k",
-    description: "Materiais nobres certificados, garantia de procedência em cada peça.",
+    icon: Ingot,
+    title: "Ouro 18k",
+    description: "Ouro 18k certificado, com garantia de procedência em cada peça.",
   },
   {
-    icon: HeartHandshake,
-    title: "Bênção opcional",
-    description: "Sua peça pode ser abençoada antes da entrega, mediante solicitação.",
+    icon: Gem,
+    title: "Gemas naturais",
+    description: "Gemas naturais com lapidações exclusivas.",
   },
   {
     icon: Truck,
     title: "Entrega Brasil",
-    description: "Embalagem premium, frete grátis em pedidos acima de R$ 800.",
+    description:
+      "Embalagens premium e temáticas, conforme a coleção, com entrega para todo o Brasil.",
   },
   {
     icon: Sparkles,
@@ -45,11 +49,7 @@ export function Diferenciais() {
       className="relative py-32 md:py-48 bg-bg-elevated noise-overlay"
     >
       <Container>
-        <SectionHeader
-          roman="III"
-          eyebrow="Diferenciais"
-          title="Por que Magnificat"
-        />
+        <SectionHeader eyebrow="Diferenciais" title="Por que Magnificat" />
 
         <div className="mt-20 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
           {ITEMS.map((item, index) => {
