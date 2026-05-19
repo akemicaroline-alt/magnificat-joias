@@ -21,7 +21,7 @@ function Instagram({ size = 18 }: { size?: number }) {
     >
       <rect width="20" height="20" x="2" y="2" rx="5" />
       <circle cx="12" cy="12" r="4" />
-      <line x1="17.5" y1="6.5" x2="17.5" y2="6.5" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
     </svg>
   );
 }
