@@ -26,7 +26,7 @@ export const env: EnvShape = {
   ),
   contactEmail: readEnv(
     "NEXT_PUBLIC_CONTACT_EMAIL",
-    isTest ? "contato@magnificatjoias.com.br" : undefined,
+    isTest ? "akemicaroline@magnificatjoias.com.br" : undefined,
   ),
   siteUrl: readEnv(
     "NEXT_PUBLIC_SITE_URL",

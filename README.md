@@ -71,7 +71,7 @@ Definidas em `.env.local` (não comitado) e na Vercel:
 | Variável                       | Exemplo                                  |
 |--------------------------------|------------------------------------------|
 | `NEXT_PUBLIC_WHATSAPP_NUMBER`  | `5511999156462`                          |
-| `NEXT_PUBLIC_CONTACT_EMAIL`    | `contato@magnificatjoias.com.br`         |
+| `NEXT_PUBLIC_CONTACT_EMAIL`    | `akemicaroline@magnificatjoias.com.br`         |
 | `NEXT_PUBLIC_SITE_URL`         | `https://magnificatjoias.com.br`         |
 
 Nenhum desses valores está hardcoded em componente — toda leitura passa por `src/lib/env.ts`.

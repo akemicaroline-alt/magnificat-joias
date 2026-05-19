@@ -94,7 +94,7 @@ Se qualquer um falhar: corrigir e rodar TODOS de novo desde o início. Nada de c
 - Repositório: `https://github.com/akemicaroline-alt/magnificat-joias`
 - Domínio destino: `https://magnificatjoias.com.br`
 - WhatsApp atendimento: `+55 (11) 99915-6462`
-- E-mail: `contato@magnificatjoias.com.br`
+- E-mail: `akemicaroline@magnificatjoias.com.br`
 
 ## Prompts úteis (cole direto)
 
