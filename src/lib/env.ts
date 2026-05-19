@@ -4,32 +4,27 @@ type EnvShape = {
   siteUrl: string;
 };
 
-function readEnv(name: string, fallback?: string): string {
+const FALLBACKS = {
+  NEXT_PUBLIC_WHATSAPP_NUMBER: "5511999156462",
+  NEXT_PUBLIC_CONTACT_EMAIL: "akemicaroline@magnificatjoias.com.br",
+  NEXT_PUBLIC_SITE_URL: "https://magnificatjoias.com.br",
+} as const;
+
+type EnvKey = keyof typeof FALLBACKS;
+
+function readEnv(name: EnvKey): string {
   const value = process.env[name];
   if (value && value.length > 0) {
     return value;
   }
-  if (fallback !== undefined) {
-    return fallback;
+  if (typeof window === "undefined") {
+    console.warn(`[env] ${name} ausente, usando fallback`);
   }
-  throw new Error(
-    `[env] Variável de ambiente obrigatória ausente: ${name}. Defina em .env.local.`,
-  );
+  return FALLBACKS[name];
 }
 
-const isTest = process.env.NODE_ENV === "test";
-
 export const env: EnvShape = {
-  whatsappNumber: readEnv(
-    "NEXT_PUBLIC_WHATSAPP_NUMBER",
-    isTest ? "5511999156462" : undefined,
-  ),
-  contactEmail: readEnv(
-    "NEXT_PUBLIC_CONTACT_EMAIL",
-    isTest ? "akemicaroline@magnificatjoias.com.br" : undefined,
-  ),
-  siteUrl: readEnv(
-    "NEXT_PUBLIC_SITE_URL",
-    isTest ? "https://magnificatjoias.com.br" : undefined,
-  ),
+  whatsappNumber: readEnv("NEXT_PUBLIC_WHATSAPP_NUMBER"),
+  contactEmail: readEnv("NEXT_PUBLIC_CONTACT_EMAIL"),
+  siteUrl: readEnv("NEXT_PUBLIC_SITE_URL"),
 };
