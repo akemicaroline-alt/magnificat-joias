@@ -4,14 +4,35 @@ import { render, screen } from "@testing-library/react";
 import { Hero } from "@/components/sections/Hero";
 
 describe("Hero", () => {
-  it("renderiza headline, subheadline e CTAs", () => {
+  it("renderiza headline, descrição e CTAs", () => {
     render(<Hero />);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       /joias que celebram/i,
     );
-    expect(screen.getByText(/prata 950 e ouro 18k/i)).toBeInTheDocument();
+    expect(screen.getByText(/ouro 18k/i)).toBeInTheDocument();
     expect(screen.getByTestId("hero-cta-primary")).toBeInTheDocument();
     expect(screen.getByTestId("hero-cta-secondary")).toBeInTheDocument();
+  });
+
+  it("eyebrow agora é 'Coleção 2026 · Guadalupe' (não mais 2025 · São Paulo)", () => {
+    render(<Hero />);
+    expect(screen.getByText(/coleção 2026 · guadalupe/i)).toBeInTheDocument();
+    expect(screen.queryByText(/coleção 2025 · são paulo/i)).toBeNull();
+  });
+
+  it("não exibe mais 'ANNO DOMINI' nem 'prata 950'", () => {
+    render(<Hero />);
+    expect(screen.queryByText(/anno domini/i)).toBeNull();
+    expect(screen.queryByText(/prata 950/i)).toBeNull();
+  });
+
+  it("renderiza a imagem de Nossa Senhora de Guadalupe com alt descritivo", () => {
+    render(<Hero />);
+    const img = screen.getByAltText(
+      /Nossa Senhora de Guadalupe, padroeira da coleção 2026/i,
+    ) as HTMLImageElement;
+    expect(img).toBeInTheDocument();
+    expect(img.getAttribute("src")).toBe("/hero-guadalupe.png");
   });
 
   it("CTA primário aponta para wa.me com número configurado", () => {
@@ -26,5 +47,10 @@ describe("Hero", () => {
     render(<Hero />);
     const cta = screen.getByTestId("hero-cta-secondary");
     expect(cta.getAttribute("href")).toBe("#colecoes");
+  });
+
+  it("mantém o indicador 'role para descobrir'", () => {
+    render(<Hero />);
+    expect(screen.getByText(/role para descobrir/i)).toBeInTheDocument();
   });
 });

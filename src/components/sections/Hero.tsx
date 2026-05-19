@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -38,6 +39,24 @@ export function Hero() {
       />
       <HeroConstellation />
 
+      <motion.div
+        initial={{ opacity: 0, scale: 1.02 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.6, ease }}
+        className="pointer-events-none absolute left-1/2 top-1/2 z-[1] -translate-x-1/2 -translate-y-1/2"
+      >
+        <Image
+          src="/hero-guadalupe.png"
+          alt="Nossa Senhora de Guadalupe, padroeira da coleção 2026"
+          width={490}
+          height={905}
+          priority
+          draggable={false}
+          sizes="(max-width: 768px) 60vw, 35vw"
+          className="h-[60vh] max-h-[820px] w-auto max-w-[90vw] object-contain opacity-[0.35] md:h-[75vh] md:opacity-[0.55]"
+        />
+      </motion.div>
+
       <Container className="relative z-10 flex flex-col items-center py-32 text-center">
         <motion.span
           custom={0}
@@ -46,7 +65,7 @@ export function Hero() {
           variants={fadeUp}
           className="eyebrow text-gold"
         >
-          Coleção 2025 · São Paulo
+          Coleção 2026 · Guadalupe
         </motion.span>
 
         <motion.h1
@@ -60,26 +79,14 @@ export function Hero() {
           Joias que celebram <em className="italic text-gold/95">a fé</em>
         </motion.h1>
 
-        <motion.div
-          custom={0.3}
-          initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          className="mt-8 flex flex-col items-center gap-4"
-        >
-          <span className="ornament text-gold/80 text-[10px] uppercase tracking-[0.5em]">
-            anno domini MMXXV
-          </span>
-        </motion.div>
-
         <motion.p
           custom={0.4}
           initial="hidden"
           animate="show"
           variants={fadeUp}
-          className="mt-6 max-w-xl font-display text-xl italic font-light text-text-muted text-pretty"
+          className="mt-10 max-w-xl font-display text-xl italic font-light text-text-muted text-pretty"
         >
-          Peças exclusivas em prata 950 e ouro 18k, criadas com devoção.
+          Peças exclusivas em ouro 18k, criadas com devoção.
         </motion.p>
 
         <motion.div
