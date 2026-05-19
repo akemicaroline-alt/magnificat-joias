@@ -48,12 +48,12 @@ export function Hero() {
         <Image
           src="/hero-guadalupe.png"
           alt="Nossa Senhora de Guadalupe, padroeira da coleção 2026"
-          width={490}
-          height={905}
+          width={636}
+          height={1051}
           priority
           draggable={false}
           sizes="(max-width: 768px) 60vw, 35vw"
-          className="h-[60vh] max-h-[820px] w-auto max-w-[90vw] object-contain opacity-[0.35] md:h-[75vh] md:opacity-[0.55]"
+          className="h-[65vh] max-h-[860px] w-auto max-w-[92vw] object-contain opacity-[0.22] mix-blend-lighten md:h-[80vh] md:opacity-[0.40]"
         />
       </motion.div>
 
@@ -63,7 +63,7 @@ export function Hero() {
           initial="hidden"
           animate="show"
           variants={fadeUp}
-          className="eyebrow text-gold"
+          className="eyebrow text-gold [text-shadow:0_2px_18px_rgba(0,0,0,0.85)]"
         >
           Coleção 2026 · Guadalupe
         </motion.span>
@@ -74,7 +74,7 @@ export function Hero() {
           initial="hidden"
           animate="show"
           variants={fadeUp}
-          className="display-xl mt-8 text-text text-balance"
+          className="display-xl mt-8 text-text text-balance [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]"
         >
           Joias que celebram <em className="italic text-gold/95">a fé</em>
         </motion.h1>
@@ -84,7 +84,7 @@ export function Hero() {
           initial="hidden"
           animate="show"
           variants={fadeUp}
-          className="mt-10 max-w-xl font-display text-xl italic font-light text-text-muted text-pretty"
+          className="mt-10 max-w-xl font-display text-xl italic font-light text-text/85 text-pretty [text-shadow:0_2px_14px_rgba(0,0,0,0.85)]"
         >
           Peças exclusivas em ouro 18k, criadas com devoção.
         </motion.p>
@@ -127,7 +127,7 @@ export function Hero() {
         <span className="relative block h-20 w-px overflow-hidden bg-gold/15">
           <span className="anim-scroll-dot absolute inset-x-0 top-0 h-6 bg-gradient-to-b from-gold to-transparent" />
         </span>
-        <span className="eyebrow text-text-faded">role para descobrir</span>
+        <span className="eyebrow text-text-faded [text-shadow:0_2px_12px_rgba(0,0,0,0.85)]">role para descobrir</span>
       </motion.div>
     </section>
   );
