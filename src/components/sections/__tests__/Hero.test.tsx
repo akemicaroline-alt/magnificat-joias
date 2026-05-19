@@ -26,15 +26,15 @@ describe("Hero", () => {
     expect(screen.queryByText(/prata 950/i)).toBeNull();
   });
 
-  it("renderiza a imagem de Nossa Senhora de Guadalupe com alt descritivo e dimensões nativas 605×1010", () => {
+  it("renderiza a imagem de Nossa Senhora de Guadalupe com alt descritivo e dimensões nativas 450×1062", () => {
     render(<Hero />);
     const img = screen.getByAltText(
       /Nossa Senhora de Guadalupe, padroeira da coleção 2026/i,
     ) as HTMLImageElement;
     expect(img).toBeInTheDocument();
     expect(img.getAttribute("src")).toBe("/hero-guadalupe.png");
-    expect(img.getAttribute("width")).toBe("605");
-    expect(img.getAttribute("height")).toBe("1010");
+    expect(img.getAttribute("width")).toBe("450");
+    expect(img.getAttribute("height")).toBe("1062");
   });
 
   it("CTA primário aponta para wa.me com número configurado", () => {
