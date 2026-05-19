@@ -26,9 +26,17 @@ describe("Logo", () => {
     expect(root.getAttribute("data-variant")).toBe("dark");
   });
 
-  it("aplica tamanho lg corretamente", () => {
+  it("aplica tamanho lg respeitando o aspect ratio natural (~2.92:1)", () => {
     render(<Logo size="lg" />);
     const img = screen.getByAltText("Magnificat Joias") as HTMLImageElement;
-    expect(img.getAttribute("width")).toBe("260");
+    expect(img.getAttribute("height")).toBe("48");
+    expect(img.getAttribute("width")).toBe("140");
+  });
+
+  it("aceita prop height para override e mantém o aspect ratio", () => {
+    render(<Logo height={36} />);
+    const img = screen.getByAltText("Magnificat Joias") as HTMLImageElement;
+    expect(img.getAttribute("height")).toBe("36");
+    expect(img.getAttribute("width")).toBe("105");
   });
 });

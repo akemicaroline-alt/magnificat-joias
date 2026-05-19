@@ -69,7 +69,7 @@ export function Footer() {
       <Container as="div" className="py-24">
         <div className="grid gap-16 md:grid-cols-12">
           <div className="md:col-span-4 flex flex-col gap-6">
-            <Logo variant="light" size="md" />
+            <Logo variant="light" size="lg" />
             <p className="body text-text-muted max-w-xs text-pretty">
               Joias que celebram a fé desde 2025. Peças exclusivas em prata 950 e ouro 18k,
               criadas com devoção em São Paulo.
@@ -111,7 +111,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <Clock size={16} className="mt-1 text-gold-dark" aria-hidden />
-                <span>Atendimento Seg–Sex, 9h às 18h</span>
+                <span>Atendimento Seg–Sáb, 9h às 18h</span>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin size={16} className="mt-1 text-gold-dark" aria-hidden />

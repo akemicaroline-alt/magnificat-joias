@@ -7,24 +7,29 @@ import { cn } from "@/lib/cn";
 export type LogoProps = {
   variant?: "light" | "dark";
   size?: "sm" | "md" | "lg";
+  height?: number;
   priority?: boolean;
   className?: string;
 };
 
-const SIZES: Record<NonNullable<LogoProps["size"]>, { w: number; h: number }> = {
-  sm: { w: 120, h: 30 },
-  md: { w: 180, h: 45 },
-  lg: { w: 260, h: 65 },
+const NATURAL_RATIO = 695 / 238;
+
+const SIZES: Record<NonNullable<LogoProps["size"]>, number> = {
+  sm: 28,
+  md: 40,
+  lg: 48,
 };
 
 export function Logo({
   variant = "light",
   size = "md",
+  height,
   priority = false,
   className,
 }: LogoProps) {
   const [errored, setErrored] = useState(false);
-  const dims = SIZES[size];
+  const h = height ?? SIZES[size];
+  const w = Math.round(h * NATURAL_RATIO);
   const src = errored ? "/logo-fallback.svg" : "/logo.png";
 
   return (
@@ -40,12 +45,12 @@ export function Logo({
       <Image
         src={src}
         alt="Magnificat Joias"
-        width={dims.w}
-        height={dims.h}
+        width={w}
+        height={h}
         priority={priority}
         onError={() => setErrored(true)}
-        sizes={`${dims.w}px`}
-        style={{ width: "auto", height: dims.h }}
+        sizes={`${w}px`}
+        style={{ width: "auto", height: h }}
       />
     </span>
   );

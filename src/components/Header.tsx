@@ -78,7 +78,12 @@ export function Header() {
       >
         <div className="mx-auto flex h-full w-full max-w-7xl items-center justify-between px-6 md:px-12">
           <Link href="#inicio" aria-label="Magnificat Joias — Início" className="relative">
-            <Logo variant="light" size="md" priority />
+            <Logo
+              variant="light"
+              height={scrolled ? 36 : 40}
+              priority
+              className="transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+            />
           </Link>
 
           <nav aria-label="Navegação principal" className="hidden md:block">

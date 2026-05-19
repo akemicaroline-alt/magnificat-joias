@@ -1,55 +1,51 @@
-import { describe, expect, it, vi, afterEach } from "vitest";
+import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 
 import { Contato } from "@/components/sections/Contato";
 
-const openSpy = vi.fn();
-
-vi.stubGlobal("open", openSpy);
-
-afterEach(() => {
-  openSpy.mockClear();
-});
-
 describe("Contato", () => {
-  it("mostra erros ao submeter com campos vazios", async () => {
-    const user = userEvent.setup();
+  it("renderiza os quatro blocos de contato com valores corretos", () => {
     render(<Contato />);
-    await user.click(screen.getByRole("button", { name: /enviar via whatsapp/i }));
-    expect(screen.getByText("Informe seu nome.")).toBeInTheDocument();
-    expect(screen.getByText("Informe seu e-mail.")).toBeInTheDocument();
-    expect(screen.getByText("Escreva uma mensagem.")).toBeInTheDocument();
-    expect(openSpy).not.toHaveBeenCalled();
+    expect(screen.getByText("E-mail")).toBeInTheDocument();
+    expect(screen.getByText("akemicaroline@magnificatjoias.com.br")).toBeInTheDocument();
+
+    expect(screen.getByText("WhatsApp")).toBeInTheDocument();
+    expect(screen.getByText("+55 (11) 99915-6462")).toBeInTheDocument();
+
+    expect(screen.getByText("Horário")).toBeInTheDocument();
+    expect(screen.getByText("Seg–Sáb, 9h às 18h")).toBeInTheDocument();
+
+    expect(screen.getByText("Atendimento")).toBeInTheDocument();
+    expect(screen.getByText("Atendemos todo o Brasil")).toBeInTheDocument();
   });
 
-  it("mostra erro com e-mail inválido", async () => {
-    const user = userEvent.setup();
+  it("e-mail tem href mailto:", () => {
     render(<Contato />);
-    await user.type(screen.getByLabelText(/nome/i), "Beatriz");
-    await user.type(screen.getByLabelText(/e-mail/i), "nao-eh-email");
-    await user.type(screen.getByLabelText(/mensagem/i), "Tenho dúvidas.");
-    await user.click(screen.getByRole("button", { name: /enviar via whatsapp/i }));
-    expect(screen.getByText("E-mail inválido.")).toBeInTheDocument();
-    expect(openSpy).not.toHaveBeenCalled();
+    const mailto = screen
+      .getByText("akemicaroline@magnificatjoias.com.br")
+      .closest("a");
+    expect(mailto).not.toBeNull();
+    expect(mailto!.getAttribute("href")).toBe(
+      "mailto:akemicaroline@magnificatjoias.com.br",
+    );
   });
 
-  it("chama window.open com URL wa.me contendo nome+email+mensagem url-encoded", async () => {
-    const user = userEvent.setup();
+  it("CTA 'Falar no WhatsApp' tem href correto via wa.me", () => {
     render(<Contato />);
-    await user.type(screen.getByLabelText(/nome/i), "Beatriz");
-    await user.type(screen.getByLabelText(/e-mail/i), "bea@example.com");
-    await user.type(screen.getByLabelText(/mensagem/i), "Quero o terço da minha mãe.");
-    await user.click(screen.getByRole("button", { name: /enviar via whatsapp/i }));
+    const cta = screen.getByTestId("contato-cta-whatsapp");
+    const href = cta.getAttribute("href") ?? "";
+    expect(href).toMatch(/^https:\/\/wa\.me\/5511999156462\?text=/);
+    expect(href).toContain(
+      encodeURIComponent("Olá! Gostaria de conhecer as joias da Magnificat."),
+    );
+    expect(cta.getAttribute("target")).toBe("_blank");
+    expect(cta.getAttribute("rel")).toBe("noopener noreferrer");
+  });
 
-    expect(openSpy).toHaveBeenCalledTimes(1);
-    const [url, target, features] = openSpy.mock.calls[0];
-    expect(typeof url).toBe("string");
-    expect(url as string).toMatch(/^https:\/\/wa\.me\/5511999156462\?text=/);
-    expect(url as string).toContain(encodeURIComponent("Beatriz"));
-    expect(url as string).toContain(encodeURIComponent("bea@example.com"));
-    expect(url as string).toContain(encodeURIComponent("Quero o terço da minha mãe."));
-    expect(target).toBe("_blank");
-    expect(features).toBe("noopener,noreferrer");
+  it("não renderiza mais o formulário antigo (nome/email/mensagem)", () => {
+    render(<Contato />);
+    expect(screen.queryByLabelText(/nome/i)).toBeNull();
+    expect(screen.queryByRole("textbox")).toBeNull();
+    expect(screen.queryByRole("button", { name: /enviar via whatsapp/i })).toBeNull();
   });
 });
