@@ -4,6 +4,21 @@ import { render, screen } from "@testing-library/react";
 import { Contato } from "@/components/sections/Contato";
 
 describe("Contato", () => {
+  it("renderiza title e description atualizada (sem eyebrow nem numeral romano)", () => {
+    render(<Contato />);
+    expect(
+      screen.getByRole("heading", { level: 2, name: /vamos conversar/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /encomendas, joias personalizadas e criação de peças exclusivas/i,
+      ),
+    ).toBeInTheDocument();
+
+    expect(screen.queryByText("Contato")).toBeNull();
+    expect(screen.queryByText("V")).toBeNull();
+  });
+
   it("renderiza os quatro blocos de contato com valores corretos", () => {
     render(<Contato />);
     expect(screen.getByText("E-mail")).toBeInTheDocument();
@@ -19,15 +34,18 @@ describe("Contato", () => {
     expect(screen.getByText("Atendemos todo o Brasil")).toBeInTheDocument();
   });
 
-  it("e-mail tem href mailto:", () => {
+  it("link do Instagram aponta para @magnificat_joias", () => {
     render(<Contato />);
-    const mailto = screen
-      .getByText("akemicaroline@magnificatjoias.com.br")
-      .closest("a");
-    expect(mailto).not.toBeNull();
-    expect(mailto!.getAttribute("href")).toBe(
-      "mailto:akemicaroline@magnificatjoias.com.br",
+    const insta = screen.getByTestId("contato-instagram");
+    expect(insta.getAttribute("href")).toBe(
+      "https://www.instagram.com/magnificat_joias",
     );
+    expect(insta.getAttribute("target")).toBe("_blank");
+    expect(insta.getAttribute("rel")).toBe("noopener noreferrer");
+    expect(insta.getAttribute("aria-label")).toBe(
+      "Seguir @magnificat_joias no Instagram",
+    );
+    expect(screen.getByText("@magnificat_joias")).toBeInTheDocument();
   });
 
   it("CTA 'Falar no WhatsApp' tem href correto via wa.me", () => {
@@ -42,10 +60,11 @@ describe("Contato", () => {
     expect(cta.getAttribute("rel")).toBe("noopener noreferrer");
   });
 
-  it("não renderiza mais o formulário antigo (nome/email/mensagem)", () => {
+  it("não renderiza mais o formulário antigo, nem o texto auxiliar 'atendimento direto'", () => {
     render(<Contato />);
     expect(screen.queryByLabelText(/nome/i)).toBeNull();
     expect(screen.queryByRole("textbox")).toBeNull();
     expect(screen.queryByRole("button", { name: /enviar via whatsapp/i })).toBeNull();
+    expect(screen.queryByText(/atendimento direto/i)).toBeNull();
   });
 });

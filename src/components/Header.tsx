@@ -70,19 +70,19 @@ export function Header() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 h-20 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          "fixed inset-x-0 top-0 z-50 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
           scrolled
-            ? "bg-bg-deep/80 backdrop-blur-lg border-b border-border"
-            : "bg-transparent",
+            ? "h-24 bg-bg-deep/80 backdrop-blur-lg border-b border-border"
+            : "h-28 bg-transparent",
         )}
       >
         <div className="mx-auto flex h-full w-full max-w-7xl items-center justify-between px-6 md:px-12">
           <Link href="#inicio" aria-label="Magnificat Joias — Início" className="relative">
             <Logo
               variant="light"
-              height={scrolled ? 36 : 40}
+              height={scrolled ? 52 : 64}
               priority
-              className="transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+              className="transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
             />
           </Link>
 

@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn";
 
 export type SectionHeaderProps = {
   roman?: string;
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description?: string;
   align?: "center" | "left";
@@ -53,9 +53,11 @@ export function SectionHeader({
           {roman}
         </motion.span>
       ) : null}
-      <motion.span variants={fade} className="eyebrow text-gold">
-        {eyebrow}
-      </motion.span>
+      {eyebrow ? (
+        <motion.span variants={fade} className="eyebrow text-gold">
+          {eyebrow}
+        </motion.span>
+      ) : null}
       <motion.h2
         variants={fade}
         className={cn(

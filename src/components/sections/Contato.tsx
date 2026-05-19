@@ -6,8 +6,12 @@ import { motion } from "framer-motion";
 
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
+import { Instagram } from "@/components/icons/Instagram";
 import { env } from "@/lib/env";
 import { buildWhatsappUrl } from "@/lib/whatsapp";
+
+const INSTAGRAM_URL = "https://www.instagram.com/magnificat_joias";
+const INSTAGRAM_HANDLE = "@magnificat_joias";
 
 const CTA_MENSAGEM = "Olá! Gostaria de conhecer as joias da Magnificat.";
 
@@ -70,10 +74,8 @@ export function Contato() {
       <Container className="flex flex-col items-center gap-20">
         <SectionHeader
           align="center"
-          roman="V"
-          eyebrow="Contato"
           title="Vamos conversar"
-          description="Estamos disponíveis para encomendas, prazos, bênção e personalizações. Cada peça é única — seu pedido também."
+          description="Estamos disponíveis para encomendas, joias personalizadas e criação de peças exclusivas para você. Cada peça é única — seu pedido também."
         />
 
         <ul
@@ -124,7 +126,33 @@ export function Contato() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.6 }}
           transition={{ duration: 0.9, ease }}
-          className="flex flex-col items-center gap-6"
+          className="mt-16 flex flex-col items-center gap-4"
+        >
+          <span className="eyebrow text-text-faded">Siga-nos</span>
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Seguir @magnificat_joias no Instagram"
+            data-testid="contato-instagram"
+            className="group inline-flex items-center gap-3 transition-colors duration-500 hover:text-gold"
+          >
+            <Instagram
+              size={18}
+              className="text-gold transition-transform duration-500 group-hover:scale-110"
+            />
+            <span className="body text-text tracking-[0.05em] transition-colors duration-500 group-hover:text-gold">
+              {INSTAGRAM_HANDLE}
+            </span>
+          </a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.9, ease }}
+          className="mt-12 flex flex-col items-center gap-6"
         >
           <span className="divider-gold" />
           <a
@@ -140,9 +168,6 @@ export function Contato() {
               className="block h-px w-8 bg-bg-deep transition-all duration-500 group-hover:w-14"
             />
           </a>
-          <p className="text-[10px] uppercase tracking-[0.3em] text-text-faded">
-            Atendimento direto, sem formulário
-          </p>
         </motion.div>
       </Container>
     </section>
