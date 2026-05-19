@@ -37,6 +37,10 @@ const SLIDES: Slide[] = [
     src: "/sobre-4.jpg",
     alt: "Par de alianças em ouro 18k finalizadas",
   },
+  {
+    src: "/sobre-5.jpg",
+    alt: "Par de alianças em ouro 18k com gravação personalizada finalizado para entrega",
+  },
 ];
 
 const AUTOPLAY_MS = 10000;

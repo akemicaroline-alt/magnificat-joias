@@ -14,14 +14,14 @@ describe("AboutCarousel", () => {
     ).toBeInTheDocument();
   });
 
-  it("renderiza 4 dots de paginação com aria-label específico", () => {
+  it("renderiza 5 dots de paginação com aria-label específico", () => {
     render(<AboutCarousel />);
     const tablist = screen.getByRole("tablist", {
       name: /selecionar slide do carrossel/i,
     });
     const tabs = within(tablist).getAllByRole("tab");
-    expect(tabs).toHaveLength(4);
-    for (let i = 0; i < 4; i++) {
+    expect(tabs).toHaveLength(5);
+    for (let i = 0; i < 5; i++) {
       expect(tabs[i].getAttribute("aria-label")).toBe(`Ir para slide ${i + 1}`);
     }
   });
@@ -34,6 +34,19 @@ describe("AboutCarousel", () => {
     expect(dot3.getAttribute("aria-current")).toBe("true");
     expect(
       await screen.findByAltText(/Aliança em fase de acabamento no ateliê/i),
+    ).toBeInTheDocument();
+  });
+
+  it("clique no dot do slide 5 mostra a aliança em ouro 18k com gravação personalizada", async () => {
+    const user = userEvent.setup();
+    render(<AboutCarousel />);
+    const dot5 = screen.getByRole("tab", { name: /ir para slide 5/i });
+    await user.click(dot5);
+    expect(dot5.getAttribute("aria-current")).toBe("true");
+    expect(
+      await screen.findByAltText(
+        /Par de alianças em ouro 18k com gravação personalizada finalizado para entrega/i,
+      ),
     ).toBeInTheDocument();
   });
 

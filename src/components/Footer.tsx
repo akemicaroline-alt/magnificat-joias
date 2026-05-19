@@ -33,7 +33,7 @@ export function Footer() {
           <div className="md:col-span-4 flex flex-col gap-6">
             <Logo variant="light" size="lg" />
             <p className="body text-text-muted max-w-xs text-pretty">
-              Joias que celebram a fé desde 2025. Peças exclusivas em prata 950 e ouro 18k,
+              Joias que celebram a fé desde 2025. Peças exclusivas em ouro 18k,
               criadas com devoção em São Paulo.
             </p>
             <span className="divider-gold" />
