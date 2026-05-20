@@ -41,7 +41,7 @@ export function Magnificat() {
   });
   const charsMV = useTransform(
     scrollYProgress,
-    [0.0, 0.65],
+    [0.0, 0.8],
     [0, CANTO.length],
   );
   useMotionValueEvent(charsMV, "change", (latest) => {
