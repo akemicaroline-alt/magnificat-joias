@@ -37,9 +37,13 @@ export function Magnificat() {
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start 0.8", "end 0.4"],
+    offset: ["start 0.85", "end 0.6"],
   });
-  const charsMV = useTransform(scrollYProgress, [0, 1], [0, CANTO.length]);
+  const charsMV = useTransform(
+    scrollYProgress,
+    [0.05, 0.85],
+    [0, CANTO.length],
+  );
   useMotionValueEvent(charsMV, "change", (latest) => {
     const next = Math.max(0, Math.min(CANTO.length, Math.round(latest)));
     setChars((prev) => (prev !== next ? next : prev));
@@ -54,7 +58,7 @@ export function Magnificat() {
       ref={sectionRef}
       id="magnificat"
       aria-labelledby="magnificat-title"
-      className="relative overflow-hidden bg-bg-deep py-32 md:py-40"
+      className="relative overflow-hidden bg-bg-deep py-20 md:py-28"
     >
       <MagnificatDust />
       <div
