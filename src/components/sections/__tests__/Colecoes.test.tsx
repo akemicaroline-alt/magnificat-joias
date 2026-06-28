@@ -14,17 +14,14 @@ describe("Colecoes", () => {
     }
   });
 
-  it("cada card tem link para WhatsApp com mensagem específica daquela coleção", () => {
+  // SHOW_WHATSAPP=false: cards viram vitrine sem link. Reverter ao reabilitar o WhatsApp.
+  it("com WhatsApp oculto, os cards não são links nem mencionam WhatsApp", () => {
     render(<Colecoes />);
     for (const item of COLECOES) {
       const card = screen.getByTestId(`collection-card-${item.id}`);
-      const link = card.querySelector("a");
-      expect(link).not.toBeNull();
-      const href = link!.getAttribute("href") ?? "";
-      expect(href).toMatch(/^https:\/\/wa\.me\/5511999156462\?text=/);
-      expect(href).toContain(encodeURIComponent(`"${item.title}"`));
-      expect(link!.getAttribute("target")).toBe("_blank");
-      expect(link!.getAttribute("rel")).toBe("noopener noreferrer");
+      expect(card.querySelector("a")).toBeNull();
     }
+    expect(screen.queryByText(/solicitar via whatsapp/i)).toBeNull();
+    expect(document.querySelector('a[href^="https://wa.me/"]')).toBeNull();
   });
 });

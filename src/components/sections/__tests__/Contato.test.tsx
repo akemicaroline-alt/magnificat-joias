@@ -48,16 +48,11 @@ describe("Contato", () => {
     expect(screen.getByText("@magnificat_joias")).toBeInTheDocument();
   });
 
-  it("CTA 'Falar no WhatsApp' tem href correto via wa.me", () => {
+  it("não exibe o CTA 'Falar no WhatsApp' enquanto SHOW_WHATSAPP=false", () => {
     render(<Contato />);
-    const cta = screen.getByTestId("contato-cta-whatsapp");
-    const href = cta.getAttribute("href") ?? "";
-    expect(href).toMatch(/^https:\/\/wa\.me\/5511999156462\?text=/);
-    expect(href).toContain(
-      encodeURIComponent("Olá! Gostaria de conhecer as joias da Magnificat."),
-    );
-    expect(cta.getAttribute("target")).toBe("_blank");
-    expect(cta.getAttribute("rel")).toBe("noopener noreferrer");
+    // SHOW_WHATSAPP=false: botão oculto. Reverter ao reabilitar.
+    expect(screen.queryByTestId("contato-cta-whatsapp")).toBeNull();
+    expect(screen.queryByText(/falar no whatsapp/i)).toBeNull();
   });
 
   it("não renderiza mais o formulário antigo, nem o texto auxiliar 'atendimento direto'", () => {

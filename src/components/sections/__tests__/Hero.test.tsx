@@ -4,14 +4,15 @@ import { render, screen } from "@testing-library/react";
 import { Hero } from "@/components/sections/Hero";
 
 describe("Hero", () => {
-  it("renderiza headline, descrição e CTAs", () => {
+  it("renderiza headline, descrição e o CTA de coleções (WhatsApp oculto)", () => {
     render(<Hero />);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       /joias que celebram/i,
     );
     expect(screen.getByText(/ouro 18k/i)).toBeInTheDocument();
-    expect(screen.getByTestId("hero-cta-primary")).toBeInTheDocument();
     expect(screen.getByTestId("hero-cta-secondary")).toBeInTheDocument();
+    // SHOW_WHATSAPP=false: CTA de WhatsApp ausente. Reverter ao reabilitar.
+    expect(screen.queryByTestId("hero-cta-primary")).toBeNull();
   });
 
   it("eyebrow agora é 'Coleção 2026 · Guadalupe' (não mais 2025 · São Paulo)", () => {
@@ -37,12 +38,10 @@ describe("Hero", () => {
     expect(img.getAttribute("height")).toBe("1062");
   });
 
-  it("CTA primário aponta para wa.me com número configurado", () => {
+  it("não exibe o CTA do WhatsApp enquanto SHOW_WHATSAPP=false", () => {
     render(<Hero />);
-    const cta = screen.getByTestId("hero-cta-primary");
-    expect(cta.getAttribute("href")).toMatch(/^https:\/\/wa\.me\/5511999156462/);
-    expect(cta.getAttribute("target")).toBe("_blank");
-    expect(cta.getAttribute("rel")).toBe("noopener noreferrer");
+    expect(screen.queryByTestId("hero-cta-primary")).toBeNull();
+    expect(screen.queryByText(/falar no whatsapp/i)).toBeNull();
   });
 
   it("CTA secundário tem href #colecoes", () => {

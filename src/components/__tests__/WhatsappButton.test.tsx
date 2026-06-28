@@ -12,23 +12,14 @@ describe("WhatsappButton", () => {
     window.scrollY = 0;
   });
 
-  it("renderiza link com número e mensagem URL-encoded", async () => {
+  // SHOW_WHATSAPP=false: o FAB não deve aparecer, mesmo com scroll suficiente.
+  // Reverter este teste ao reabilitar o WhatsApp.
+  it("não renderiza o FAB enquanto SHOW_WHATSAPP=false, mesmo após scroll", async () => {
     await act(async () => {
       render(<WhatsappButton />);
     });
-    const link = await screen.findByTestId("whatsapp-fab");
-    const href = link.getAttribute("href");
-    expect(href).toMatch(/^https:\/\/wa\.me\/5511999156462\?text=/);
-    expect(href).toContain(encodeURIComponent("Magnificat Joias"));
-  });
-
-  it("aplica aria-label adequado e target _blank com rel correto", async () => {
-    await act(async () => {
-      render(<WhatsappButton />);
-    });
-    const link = await screen.findByTestId("whatsapp-fab");
-    expect(link.getAttribute("aria-label")).toBe("Falar no WhatsApp");
-    expect(link.getAttribute("target")).toBe("_blank");
-    expect(link.getAttribute("rel")).toBe("noopener noreferrer");
+    expect(screen.queryByTestId("whatsapp-fab")).toBeNull();
+    expect(screen.queryByLabelText(/falar no whatsapp/i)).toBeNull();
+    expect(screen.queryByText(/falar no whatsapp/i)).toBeNull();
   });
 });

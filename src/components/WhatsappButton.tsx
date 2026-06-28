@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { env } from "@/lib/env";
+import { SHOW_WHATSAPP } from "@/lib/features";
 import { buildWhatsappUrl } from "@/lib/whatsapp";
 
 const DEFAULT_MESSAGE =
@@ -27,7 +28,7 @@ export function WhatsappButton() {
 
   return (
     <AnimatePresence>
-      {visible ? (
+      {SHOW_WHATSAPP && visible ? (
         <motion.div
           key="whatsapp-fab"
           initial={{ opacity: 0, scale: 0.85, y: 16 }}

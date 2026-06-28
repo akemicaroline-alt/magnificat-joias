@@ -8,6 +8,7 @@ import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Instagram } from "@/components/icons/Instagram";
 import { env } from "@/lib/env";
+import { SHOW_WHATSAPP } from "@/lib/features";
 import { buildWhatsappUrl } from "@/lib/whatsapp";
 
 const INSTAGRAM_URL = "https://www.instagram.com/magnificat_joias";
@@ -155,19 +156,21 @@ export function Contato() {
           className="mt-12 flex flex-col items-center gap-6"
         >
           <span className="divider-gold" />
-          <a
-            href={ctaHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-testid="contato-cta-whatsapp"
-            className="group inline-flex items-center justify-center gap-3 bg-gold px-10 py-5 text-[13px] font-normal uppercase tracking-[0.22em] text-bg-deep transition-all duration-500 hover:bg-gold-light"
-          >
-            <span>Falar no WhatsApp</span>
-            <span
-              aria-hidden
-              className="block h-px w-8 bg-bg-deep transition-all duration-500 group-hover:w-14"
-            />
-          </a>
+          {SHOW_WHATSAPP && (
+            <a
+              href={ctaHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="contato-cta-whatsapp"
+              className="group inline-flex items-center justify-center gap-3 bg-gold px-10 py-5 text-[13px] font-normal uppercase tracking-[0.22em] text-bg-deep transition-all duration-500 hover:bg-gold-light"
+            >
+              <span>Falar no WhatsApp</span>
+              <span
+                aria-hidden
+                className="block h-px w-8 bg-bg-deep transition-all duration-500 group-hover:w-14"
+              />
+            </a>
+          )}
         </motion.div>
       </Container>
     </section>

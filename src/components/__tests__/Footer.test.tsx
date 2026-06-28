@@ -19,12 +19,13 @@ describe("Footer", () => {
     expect(screen.queryByText(/prata/i)).toBeNull();
   });
 
-  it("exibe o e-mail e o telefone configurados via env", () => {
+  it("exibe o e-mail e oculta o telefone (SHOW_WHATSAPP=false)", () => {
     render(<Footer />);
     expect(
       screen.getByText(/akemicaroline@magnificatjoias\.com\.br/i),
     ).toBeInTheDocument();
-    expect(screen.getByText(/\+55 \(11\) 99915-6462/)).toBeInTheDocument();
+    // SHOW_WHATSAPP=false: telefone oculto. Reverter ao reabilitar.
+    expect(screen.queryByText(/99915.?6462/)).toBeNull();
   });
 
   it("link do Instagram aponta para @magnificat_joias com target _blank", () => {

@@ -6,6 +6,7 @@ import { Logo } from "@/components/Logo";
 import { Facebook } from "@/components/icons/Facebook";
 import { Instagram } from "@/components/icons/Instagram";
 import { env } from "@/lib/env";
+import { SHOW_WHATSAPP } from "@/lib/features";
 
 const navColumns = [
   { href: "#inicio", label: "Início" },
@@ -67,10 +68,12 @@ export function Footer() {
                   {env.contactEmail}
                 </a>
               </li>
-              <li className="flex items-start gap-3">
-                <Phone size={16} className="mt-1 text-gold-dark" aria-hidden />
-                <span>{formatPhone(env.whatsappNumber)}</span>
-              </li>
+              {SHOW_WHATSAPP && (
+                <li className="flex items-start gap-3">
+                  <Phone size={16} className="mt-1 text-gold-dark" aria-hidden />
+                  <span>{formatPhone(env.whatsappNumber)}</span>
+                </li>
+              )}
               <li className="flex items-start gap-3">
                 <Clock size={16} className="mt-1 text-gold-dark" aria-hidden />
                 <span>Atendimento Seg–Sáb, 9h às 18h</span>

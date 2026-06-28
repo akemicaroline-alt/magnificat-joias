@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
 import { env } from "@/lib/env";
+import { SHOW_WHATSAPP } from "@/lib/features";
 import { buildCollectionMessage, buildWhatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/cn";
 
@@ -132,6 +133,44 @@ export function CollectionCard({ item, index }: Props) {
     mensagem: buildCollectionMessage(item.title),
   });
 
+  const conteudo = (
+    <>
+      <div
+        className={cn(
+          "relative aspect-[4/5] overflow-hidden noise-overlay",
+          item.gradient,
+        )}
+      >
+        <div className="absolute inset-0 flex items-center justify-center p-12 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105">
+          <Ornament kind={item.ornament} />
+        </div>
+        <div className="absolute inset-x-6 bottom-6 flex items-center justify-between">
+          <span className="eyebrow text-gold/80">{item.roman}</span>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-text-muted">
+            edição 2025
+          </span>
+        </div>
+      </div>
+
+      <div className="flex flex-1 flex-col gap-5 p-8">
+        <h3 className="display-s text-text">{item.title}</h3>
+        <p className="text-sm font-light leading-relaxed text-text-muted">
+          {item.description}
+        </p>
+        <span className="divider-gold" />
+        {SHOW_WHATSAPP && (
+          <span className="mt-auto inline-flex items-center gap-2 text-[12px] font-normal uppercase tracking-[0.2em] text-gold transition-colors duration-300 group-hover:text-gold-light">
+            Solicitar via WhatsApp
+            <ArrowUpRight
+              size={14}
+              className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
+            />
+          </span>
+        )}
+      </div>
+    </>
+  );
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 32 }}
@@ -141,45 +180,19 @@ export function CollectionCard({ item, index }: Props) {
       data-testid={`collection-card-${item.id}`}
       className="group relative flex flex-col border border-border bg-bg-elevated transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-gold hover:shadow-[0_30px_60px_-30px_rgba(200,169,110,0.35)]"
     >
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`Solicitar informações sobre ${item.title} via WhatsApp`}
-        className="flex h-full flex-col"
-      >
-        <div
-          className={cn(
-            "relative aspect-[4/5] overflow-hidden noise-overlay",
-            item.gradient,
-          )}
+      {SHOW_WHATSAPP ? (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Solicitar informações sobre ${item.title} via WhatsApp`}
+          className="flex h-full flex-col"
         >
-          <div className="absolute inset-0 flex items-center justify-center p-12 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105">
-            <Ornament kind={item.ornament} />
-          </div>
-          <div className="absolute inset-x-6 bottom-6 flex items-center justify-between">
-            <span className="eyebrow text-gold/80">{item.roman}</span>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-text-muted">
-              edição 2025
-            </span>
-          </div>
-        </div>
-
-        <div className="flex flex-1 flex-col gap-5 p-8">
-          <h3 className="display-s text-text">{item.title}</h3>
-          <p className="text-sm font-light leading-relaxed text-text-muted">
-            {item.description}
-          </p>
-          <span className="divider-gold" />
-          <span className="mt-auto inline-flex items-center gap-2 text-[12px] font-normal uppercase tracking-[0.2em] text-gold transition-colors duration-300 group-hover:text-gold-light">
-            Solicitar via WhatsApp
-            <ArrowUpRight
-              size={14}
-              className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
-            />
-          </span>
-        </div>
-      </a>
+          {conteudo}
+        </a>
+      ) : (
+        <div className="flex h-full flex-col">{conteudo}</div>
+      )}
     </motion.article>
   );
 }

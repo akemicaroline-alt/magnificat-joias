@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/Container";
 import { HeroConstellation } from "@/components/HeroConstellation";
 import { env } from "@/lib/env";
+import { SHOW_WHATSAPP } from "@/lib/features";
 import { buildWhatsappUrl } from "@/lib/whatsapp";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -94,18 +95,20 @@ export function Hero() {
           initial="hidden"
           animate="show"
           variants={fadeUp}
-          className="mt-14 flex flex-col items-center gap-4 sm:flex-row sm:gap-6"
+          className="mt-14 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6"
         >
-          <a
-            href={whatsappHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-testid="hero-cta-primary"
-            className="group inline-flex items-center justify-center gap-3 bg-gold px-8 py-4 text-[13px] font-normal uppercase tracking-[0.22em] text-bg-deep transition-all duration-500 hover:bg-gold-light"
-          >
-            <span>Falar no WhatsApp</span>
-            <span aria-hidden className="block h-px w-6 bg-bg-deep transition-all duration-500 group-hover:w-10" />
-          </a>
+          {SHOW_WHATSAPP && (
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="hero-cta-primary"
+              className="group inline-flex items-center justify-center gap-3 bg-gold px-8 py-4 text-[13px] font-normal uppercase tracking-[0.22em] text-bg-deep transition-all duration-500 hover:bg-gold-light"
+            >
+              <span>Falar no WhatsApp</span>
+              <span aria-hidden className="block h-px w-6 bg-bg-deep transition-all duration-500 group-hover:w-10" />
+            </a>
+          )}
           <Link
             href="#colecoes"
             data-testid="hero-cta-secondary"
