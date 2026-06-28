@@ -49,11 +49,15 @@ export function Contato() {
       value: env.contactEmail,
       href: `mailto:${env.contactEmail}`,
     },
-    {
-      icon: Phone,
-      eyebrow: "WhatsApp",
-      value: formatPhone(env.whatsappNumber),
-    },
+    ...(SHOW_WHATSAPP
+      ? [
+          {
+            icon: Phone,
+            eyebrow: "WhatsApp",
+            value: formatPhone(env.whatsappNumber),
+          },
+        ]
+      : []),
     {
       icon: Clock,
       eyebrow: "Horário",
@@ -81,7 +85,9 @@ export function Contato() {
 
         <ul
           aria-label="Canais de atendimento"
-          className="grid w-full gap-12 sm:grid-cols-2 lg:grid-cols-4"
+          className={`grid w-full gap-12 sm:grid-cols-2 ${
+            SHOW_WHATSAPP ? "lg:grid-cols-4" : "lg:grid-cols-3"
+          }`}
         >
           {items.map((item, index) => {
             const Icon = item.icon;

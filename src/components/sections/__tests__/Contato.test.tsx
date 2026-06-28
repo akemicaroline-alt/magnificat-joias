@@ -19,19 +19,21 @@ describe("Contato", () => {
     expect(screen.queryByText("V")).toBeNull();
   });
 
-  it("renderiza os quatro blocos de contato com valores corretos", () => {
+  it("renderiza os três blocos de contato (sem WhatsApp) com valores corretos", () => {
     render(<Contato />);
     expect(screen.getByText("E-mail")).toBeInTheDocument();
     expect(screen.getByText("akemicaroline@magnificatjoias.com.br")).toBeInTheDocument();
-
-    expect(screen.getByText("WhatsApp")).toBeInTheDocument();
-    expect(screen.getByText("+55 (11) 99915-6462")).toBeInTheDocument();
 
     expect(screen.getByText("Horário")).toBeInTheDocument();
     expect(screen.getByText("Seg–Sáb, 9h às 18h")).toBeInTheDocument();
 
     expect(screen.getByText("Atendimento")).toBeInTheDocument();
     expect(screen.getByText("Atendemos todo o Brasil")).toBeInTheDocument();
+
+    // SHOW_WHATSAPP=false: item de WhatsApp da grade ausente (cobre toda a seção).
+    // Reverter ao reabilitar.
+    expect(screen.queryByText("WhatsApp")).toBeNull();
+    expect(screen.queryByText(/99915.?6462/)).toBeNull();
   });
 
   it("link do Instagram aponta para @magnificat_joias", () => {
